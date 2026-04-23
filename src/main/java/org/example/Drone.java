@@ -36,10 +36,14 @@ public class Drone {
         return this.facing;
     }
 
+/*
     public void setName(String name) {
         this.name = name;
     }
+*/
 
+    /*
+ Should outside code be allowed to access this directly? No
     public void setPositionX(int positionX) {
         this.positionX = positionX;
     }
@@ -47,10 +51,13 @@ public class Drone {
     public void setPositionY(int positionY) {
         this.positionY = positionY;
     }
+*/
 
+/*
     public void setFacing(Direction facing) {
         this.facing = facing;
     }
+*/
 
     public void moveForward(int steps) {
         switch(facing) {
@@ -65,8 +72,12 @@ public class Drone {
                 break;
             case WEST:
                 this.positionX -= steps;
+                break;
+            default:
+                this.status = "I cannot move.";
+                return;
         }
-        this.status = "Moved by " + steps + ".";
+        this.status = "Moved by " + steps + " steps.";
     }
 
     public void turnLeft() {
@@ -83,8 +94,11 @@ public class Drone {
             case EAST:
                 this.facing = Direction.NORTH;
                 break;
+            default:
+                this.status = "I cannot turn left.";
+                return;
         }
-        this.status = "Turned left";
+        this.status = "Turned left.";
     }
 
     public void turnRight() {
@@ -101,7 +115,14 @@ public class Drone {
             case WEST:
                 this.facing = Direction.NORTH;
                 break;
+            default:
+                this.status = "I cannot turn right.";
+                return;
         }
         this.status = "Turned right.";
+    }
+
+    public void updateStatus() {
+        this.status = "[" + this.positionX + "," + this.positionY + "]";
     }
 }
